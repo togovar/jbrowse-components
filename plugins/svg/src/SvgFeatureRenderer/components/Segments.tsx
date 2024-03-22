@@ -20,6 +20,7 @@ const Segments = observer(function (props: {
   reversed?: boolean
   subfeatures?: Feature[]
   children?: React.ReactNode
+  fontHeight: number
 }) {
   const {
     feature,
@@ -29,6 +30,7 @@ const Segments = observer(function (props: {
     // some subfeatures may be computed e.g. makeUTRs,
     // so these are passed as a prop, or feature.get('subfeatures') by default
     subfeatures = feature.get('subfeatures'),
+    fontHeight
   } = props
 
   const theme = useTheme()
@@ -40,6 +42,15 @@ const Segments = observer(function (props: {
   const y = top + height / 2
   return (
     <>
+      <text
+        x={left - 10}
+        y={y + fontHeight / 2}
+        textAnchor="end"
+        fill="#666"
+        fontSize={fontHeight}
+      >
+        {feature.id()}
+      </text>
       <line
         data-testid={feature.id()}
         x1={left}
